@@ -106,3 +106,9 @@ SELECT * FROM salesman
 WHERE commission > 0.10 AND commission < 0.12;
 
 
+8. Write a SQL query to display all orders where purchase amount less than 200 or exclude those orders 
+which order date is on or greater than 10th Feb,2012 and customer id is below 3009.
+
+SELECT * FROM orders
+WHERE (purch_amt < 200
+OR NOT (ord_date >= '2012-02-10' AND customer_id < 3009));
