@@ -101,3 +101,45 @@ SELECT * FROM customer
 WHERE customer_id BETWEEN 3007 AND 3009;
 
 
+5. Write a SQL statement to find those salesmen with all information who gets the commission within a range of 0.12 and 0.14.  
+
+SELECT * FROM salesman
+WHERE commission BETWEEN 0.12 AND 0.14;
+
+
+6. Write a query to filter all those orders with all information which purchase amount value is within 
+the range 500 and 4000 except those orders of purchase amount value 948.50 and 1983.43.
+
+SELECT * FROM orders
+WHERE purch_amt BETWEEN 500 AND 4000
+AND NOT purch_amt IN (948.50, 1983.43);
+
+
+7. Write a SQL statement to find those salesmen with all other information and name started with any letter within 'A' and 'L'.
+
+SELECT * FROM salesman
+WHERE name LIKE '[a-l]%';
+
+
+8. Write a SQL statement to find those salesmen with all other information and name started with other than any latter within 'A' and 'L'.
+
+SELECT * FROM salesman
+WHERE name LIKE '[!a-l]%';
+
+
+9. Write a SQL statement to find that customer with all information whose name begin with the letter 'B'.
+
+SELECT * FROM customer
+WHERE cust_name LIKE 'b%';
+
+
+10. Write a SQL statement to find all those customers with all information whose names are ending with the letter 'n'. 
+
+SELECT * FROM customer
+WHERE cust_name LIKE '%n';
+
+
+11. Write a SQL statement to find those salesmen with all information whose name containing the 1st character is 'N' and the 4th character is 'l' and rests may be any character.
+
+SELECT * FROM salesman
+WHERE name LIKE 'n__l%';
