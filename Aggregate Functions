@@ -84,3 +84,51 @@ DPT_CODE DPT_NAME        DPT_ALLOTMENT
    733843 Mario           Saule                   63
    631548 Alan            Snappy                  27
    839139 Maria           Foster                  57
+
+
+1. Write a SQL statement to find the total purchase amount of all orders. 
+
+SELECT SUM(purch_amt) FROM orders;
+
+
+2. Write a SQL statement to find the average purchase amount of all orders.  
+
+SELECT AVG(purch_amt) FROM orders;
+
+
+3. Write a SQL statement to find the number of salesmen currently listing for all of their customers. 
+
+SELECT COUNT(DISTINCT salesman_id) FROM orders;
+
+
+4. Write a SQL statement know how many customer have listed their names.
+
+SELECT COUNT(DISTINCT cust_name) FROM customer;
+
+
+5. Write a SQL statement find the number of customers who gets at least a gradation for his/her performance.  
+
+SELECT COUNT(DISTINCT cust_name) FROM customer
+WHERE grade IS NOT NULL;
+
+
+6. Write a SQL statement to get the maximum purchase amount of all the orders. 
+
+SELECT MAX(purch_amt) FROM orders;
+
+
+7. Write a SQL statement to get the minimum purchase amount of all the orders.
+
+SELECT MIN(purch_amt) FROM orders;
+
+
+8. Write a SQL statement which selects the highest grade for each of the cities of the customers. 
+
+SELECT MAX(grade), city FROM customer
+GROUP BY city;
+
+
+9. Write a SQL statement to find the highest purchase amount ordered by the each customer with their ID and highest purchase amount.  
+
+SELECT MAX(purch_amt), customer_id FROM orders
+GROUP BY customer_id;
