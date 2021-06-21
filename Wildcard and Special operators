@@ -199,3 +199,13 @@ SELECT * FROM customer
 WHERE grade IS NULL;
 
 
+21. Write a SQL statement to find that customer with all information who gets a grade except NULL value. 
+
+SELECT * FROM customer
+WHERE grade IS NOT NULL;
+
+
+22. Write a query in SQL to display all the data of employees whose last name begins with an 'D'.
+
+SELECT * FROM emp_details
+WHERE emp_lname LIKE 'D%';
