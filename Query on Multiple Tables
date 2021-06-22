@@ -94,3 +94,19 @@ WHERE s.commission BETWEEN 0.12 AND 0.14
 AND s.salesman_id = c.salesman_id;
 
 
+7. Write a SQL statement that produces all orders with the order number, customer name, commission rate and earned commission amount for those customers who carry their grade is 200 or more and served by an existing salesman.
+
+SELECT DISTINCT o.ord_no, c.cust_name, s.commission AS "Commission%", CONCAT(s.commission * o.purch_amt) AS "Commission"
+FROM customer AS c, salesman AS s, orders as o
+WHERE c.grade >= 200
+AND s.salesman_id = c.salesman_id
+AND c.customer_id = o.customer_id;
+
+
+8.Find all customers with orders on October 5, 2012.
+
+SELECT c.cust_name
+FROM customer AS c, salesman AS s, orders as o
+WHERE o.ord_date = '2012-10-05'
+AND c.customer_id = o.customer_id
+AND s.salesman_id = c.salesman_id;
