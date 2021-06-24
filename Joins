@@ -246,3 +246,108 @@ CROSS JOIN customer AS c;
 
 18. Write a SQL statement to make a cartesian product between salesman and customer i.e. each salesman will appear for all customer and vice versa for that salesman who belongs to a city.
 
+SELECT *
+FROM salesman AS s 
+CROSS JOIN customer AS c
+WHERE s.city IS NOT NULL;
+
+
+19. Write a SQL statement to make a cartesian product between salesman and customer i.e. each salesman will appear for all customer and vice versa for those salesmen who belongs to a city and the customers who must have a grade.
+
+SELECT *
+FROM salesman AS s 
+CROSS JOIN customer AS c
+WHERE s.city IS NOT NULL
+AND c.grade IS NOT NULL;
+
+
+20. Write a SQL statement to make a cartesian product between salesman and customer i.e. each salesman will appear for all customer and vice versa for those salesmen who must belong a city which is not the same as his customer and the customers should have an own grade.
+
+SELECT *
+FROM salesman AS s 
+CROSS JOIN customer AS c
+WHERE s.city <> c.city
+AND s.city IS NOT NULL
+AND c.grade IS NOT NULL;
+
+
+21. Write a SQL query to display all the data from the item_mast, including all the data for each item's producer company.
+
+SELECT *
+FROM item_mast AS i 
+LEFT JOIN company_mast AS c
+ON i.pro_com = c.com_id;
+
+
+22. Write a SQL query to display the item name, price, and company name of all the products
+
+SELECT i.pro_name, i.pro_price, c.com_name
+FROM company_mast AS c
+LEFT JOIN item_mast AS i
+ON c.com_id = i.pro_com;
+
+
+23. Write a SQL query to display the average price of items of each company, showing the name of the company.
+
+SELECT c.com_name, AVG(i.pro_price) AS "Average Price"
+FROM company_mast AS c
+INNER JOIN item_mast AS i
+ON c.com_id = i.pro_com
+GROUP BY c.com_name
+ORDER BY c.com_name;
+
+
+24. Write a SQL query to display the names of the company whose products have an average price larger than or equal to Rs. 350.
+
+SELECT c.com_name, AVG(i.pro_price) AS "Average Price"
+FROM company_mast AS c
+INNER JOIN item_mast AS i
+ON c.com_id = i.pro_com
+GROUP BY c.com_name
+HAVING AVG(i.pro_price) >= 350;
+
+
+25. Write a SQL query to display the name of each company along with the ID and price for their most expensive product.
+
+SELECT i.pro_name, i.pro_price, c.com_name
+FROM item_mast AS i 
+INNER JOIN company_mast AS c
+ON i.pro_com = c.com_id
+AND i.pro_price = (SELECT MAX(i.pro_price)
+  FROM item_mast AS i
+  WHERE i.pro_com = c.com_id);
+  
+
+26. Write a query in SQL to display all the data of employees including their department. 
+
+SELECT *
+FROM emp_department as a
+INNER JOIN emp_details as b
+ON a.dpt_code = b.emp_dept;
+
+
+27. Write a query in SQL to display the first name and last name of each employee, along with the name and sanction amount for their department. 
+
+SELECT b.emp_fname, b.emp_lname, a.dpt_name, a.dpt_allotment
+FROM emp_department as a
+INNER JOIN emp_details as b
+ON a.dpt_code = b.emp_dept;
+
+
+28. Write a query in SQL to find the first name and last name of employees working for departments with a budget more than Rs. 50000.
+
+SELECT b.emp_fname, b.emp_lname
+FROM emp_department as a
+INNER JOIN emp_details as b
+ON a.dpt_code = b.emp_dept
+WHERE a.dpt_allotment > 50000;
+
+
+29. Write a query in SQL to find the names of departments where more than two employees are working. 
+
+SELECT a.dpt_name
+FROM emp_department as a
+INNER JOIN emp_details as b
+ON a.dpt_code = b.emp_dept
+GROUP BY a.dpt_name
+HAVING COUNT(a.dpt_code) > 2;
