@@ -183,3 +183,34 @@ WHERE commission = (
 SELECT MAX(commission) 
 FROM salesman));
 
+
+10. Write a query to display all the customers with orders issued on date 17th August, 2012. 
+
+SELECT c.cust_name
+FROM orders AS o
+INNER JOIN customer AS c
+ON o.customer_id = c.customer_id
+WHERE o.ord_date ='2012-08-17';
+
+
+11. Write a query to find the name and numbers of all salesmen who had more than one customer. 
+
+SELECT salesman_id, name
+FROM salesman
+WHERE salesman_id IN 
+(SELECT salesman_id 
+FROM customer AS c
+GROUP BY salesman_id
+HAVING COUNT(c.customer_id) > 1);
+
+
+12. Write a query to find all orders with order amounts which are above-average amounts for their customers.
+
+SELECT * 
+FROM orders AS a
+WHERE purch_amt >
+    (SELECT AVG(purch_amt) 
+     FROM orders AS b 
+     WHERE b.customer_id = a.customer_id);
+     
+
