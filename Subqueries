@@ -106,3 +106,80 @@ ON o.salesman_id = s.salesman_id
 WHERE s.name = 'Paul Adam';
 
 
+2. Write a query to display all the orders for the salesman who belongs to the city London.
+
+SELECT *
+FROM orders AS o
+INNER JOIN salesman AS s
+ON o.salesman_id = s.salesman_id
+WHERE s.city = 'London';
+
+
+3. Write a query to find all the orders issued against the salesman who may works for customer whose id is 3007.
+
+SELECT *
+FROM orders AS o
+INNER JOIN salesman AS s
+ON o.salesman_id = s.salesman_id
+WHERE o.customer_id = 3007;
+
+
+4. Write a query to display all the orders which values are greater than the average order value for 10th October 2012. 
+
+SELECT *
+FROM orders
+WHERE purch_amt >
+   (SELECT  AVG(purch_amt) 
+    FROM orders 
+    WHERE ord_date ='2012-10-10');
+    
+    
+5. Write a query to find all orders attributed to a salesman in New york.
+
+SELECT *
+FROM orders as o
+INNER JOIN salesman AS s
+ON o.salesman_id = s.salesman_id
+WHERE s.city = 'New York';
+
+
+6. Write a query to display the commission of all the salesmen servicing customers in Paris.  
+
+SELECT s.commission, s.name
+FROM customer as c
+INNER JOIN salesman AS s
+ON c.salesman_id = s.salesman_id
+WHERE c.city = 'Paris';
+
+
+7. Write a query to display all the customers whose id is 2001 bellow the salesman ID of Mc Lyon. 
+
+SELECT c.cust_name
+FROM customer as c
+INNER JOIN salesman AS s
+ON c.salesman_id = s.salesman_id
+WHERE c.customer_id < 3005;
+
+
+8. Write a query to count the customers with grades above New York's average. 
+
+SELECT grade, COUNT(cust_name)
+FROM customer as c
+GROUP BY grade
+HAVING grade >
+(SELECT AVG(grade) 
+FROM customer
+WHERE city = 'New York');
+
+
+9. Write a query to extract the data from the orders table for those salesman who earned the maximum commission
+
+SELECT * 
+FROM orders 
+WHERE salesman_id IN(
+SELECT salesman_id 
+FROM salesman
+WHERE commission = (
+SELECT MAX(commission) 
+FROM salesman));
+
